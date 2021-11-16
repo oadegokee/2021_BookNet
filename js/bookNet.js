@@ -1,29 +1,27 @@
 $(function() {
   
-  var api = "https://www.googleapis.com/books/v1/volumes?q=" + $(titleSrc);
+  var api = "https://www.googleapis.com/books/v1/volumes?q=";
 
-	var titleSrc = document.querySelector('.titleSrc').textContent;
-	var authorSrc = document.querySelector(".authorSrc").textContent;
-	var isbnSrc = document.querySelector(".isbnSrc").textContent;
-
-	var titleTxt = document.querySelector(".title").textContent;
-	var authorTxt = document.querySelector(".author").textContent;
-    
-    
   $("#submit").click(function() {
+    var titleSrc = $(".titleSrc").val();
     
-    fetch(api)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-			title = data.items[0].volumeInfo.title;
-			console.log(title);
-      
-			$(titleTxt).text("Title: " + title);
-      
-    })
-  })
+    if (titleSrc == "") {
+        alert("Please enter a title");
+    } else {
+      $.get(api + titleSrc, function(response) {
+        console.log(response);
+
+        for(i=0; i<response.items.length; i++) {
+          title = response.items[i].volumeInfo.title;
+
+          console.log(title);
+
+          $(".title").text("Title: " + title);
+        } // end of for loop
+
+      }); // end of get function
+    }
+    
+  }) // end of onclick function
 });
 
