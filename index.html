@@ -7,15 +7,24 @@
 </head>
 <body>
 
-<h1 id="websiteTitle">Book Net</h1>
+  <h1 id="websiteTitle">Book Net</h1>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="js/bookNet.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<input type="text" placeholder="Title">
-<input type="text" placeholder="Author">
-<input type="number" placeholder="ISBN">
-<button type="submit">Search</button>
+  <input type="text" placeholder="Title">
+  <input type="text" placeholder="Author">
+  <input type="number" placeholder="ISBN">
+  <button type="submit" id="submit">Search</button>
+  
+  <div class="bookInfo">
+    <h3 class="title">Title:</h3>
+    <h3 class="author">Author:</h3>
+    <img id="bookCover" src="" alt="">
+  </div>
+
+  
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="js/bookNet.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
 
 </body>
 </html>
