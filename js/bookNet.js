@@ -16,7 +16,10 @@ $(function() {
 
           console.log(title);
 
-          $(".title").text("Title: " + title);
+//					$.each(title, function(names){
+//						
+//					});
+          $(".title").append("Title: " + title + "<br>");
         } // end of for loop
 
       }); // end of get function
