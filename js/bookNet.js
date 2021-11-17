@@ -19,7 +19,7 @@ $(function() {
 
           console.log(title);
 
-          $(".title").append("Title: " + title + "<br>author: " + author + "<br><br>");
+          $(".title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
         } // end of for loop
 
       }); // end of get function
