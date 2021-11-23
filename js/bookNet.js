@@ -1,6 +1,7 @@
 $(function() {
   
-  var api = "https://www.googleapis.com/books/v1/volumes?q=";
+  var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:";
+  var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
 
   $("#submit").click(function() {
     var titleSrc = $(".titleSrc").val();
@@ -9,8 +10,8 @@ $(function() {
     
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
-    } else {
-      $.get(api + titleSrc, function(response) {
+    } else if (titleSrc != "") {
+      $.get(titleApi + titleSrc, function(response) {
         console.log(response);
 
         for(i=0; i<response.items.length; i++) {
@@ -20,6 +21,23 @@ $(function() {
           console.log(title);
 
           $(".title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
+          
+        } // end of for loop
+
+      }); // end of get function
+    } else if (authorSrc != "") {
+      // // Search by author
+      $.get(authorApi + authorSrc, function(response) {
+        console.log(response);
+
+        for(i=0; i<response.items.length; i++) {
+          title = response.items[i].volumeInfo.title;
+					author = response.items[i].volumeInfo.authors;
+
+          console.log(author);
+
+          $(".title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
+          
         } // end of for loop
 
       }); // end of get function
