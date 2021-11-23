@@ -13,6 +13,7 @@ $(function() {
     } else if (titleSrc != "") {
       $.get(titleApi + titleSrc, function(response) {
         console.log(response);
+				$(".title").html("");
 
         for(i=0; i<response.items.length; i++) {
           title = response.items[i].volumeInfo.title;
@@ -29,10 +30,12 @@ $(function() {
       // // Search by author
       $.get(authorApi + authorSrc, function(response) {
         console.log(response);
+				$(".title").html("");
 
         for(i=0; i<response.items.length; i++) {
           title = response.items[i].volumeInfo.title;
 					author = response.items[i].volumeInfo.authors;
+					
 
           console.log(author);
 
