@@ -97,6 +97,10 @@ $(function() {
 					if (!author) {
 				author = "Anonymous";
 			}
+					
+					if (!desc) {
+						desc = "No description included";
+					}
 
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN: " + isbn + "<br><br>");
           
@@ -123,6 +127,10 @@ $(function() {
 					if (!author) {
 				author = "Anonymous";
 			}
+					
+					if (!desc) {
+						desc = "No description included";
+					}
 
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br><br>");
           
