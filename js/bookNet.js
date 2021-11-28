@@ -93,10 +93,18 @@ $(function() {
           isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
 
           console.log(title);
+					
+					// Checks to see if author is missing
+					if (!author) {
+				author = "Anonymous";
+			}
 
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>ISBN: " + isbn + "<br><br>");
+					$(author).not("undefined");
           
         } // end of for loop
+			
+			
 
       }); // end of get function
   }
@@ -113,6 +121,11 @@ $(function() {
 					author = response.items[i].volumeInfo.authors;
 
           console.log(title);
+					
+					// Checks to see if author is missing
+					if (!author) {
+				author = "Anonymous";
+			}
 
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
           
