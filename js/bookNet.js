@@ -3,76 +3,110 @@ $(function() {
   var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:";
   var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
   var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
+  var genreName = $('#genreName');
 
   $("#submit").click(function() {
     var titleSrc = $(".titleSrc").val();
     var authorSrc = $(".authorSrc").val();
     var isbnSrc = $(".isbnSrc").val();
+    genreName.css({
+         display: 'none'
+    });
     
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
     } else if (titleSrc != "") {
-      $.get(titleApi + titleSrc, function(response) {
-        console.log(response);
-				$(".title").html("");
+      displayBookInfo(titleApi + titleSrc);
 
-        for(i=0; i<response.items.length; i++) {
-          title = response.items[i].volumeInfo.title;
-					author = response.items[i].volumeInfo.authors;
-
-          console.log(title);
-
-          $(".title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
-          
-        } // end of for loop
-
-      }); // end of get function
     } else if (authorSrc != "") {
-      // // Search by author
-      $.get(authorApi + authorSrc, function(response) {
-        console.log(response);
-				$(".title").html("");
-
-        for(i=0; i<response.items.length; i++) {
-          title = response.items[i].volumeInfo.title;
-					author = response.items[i].volumeInfo.authors;
-					
-
-          console.log(author);
-
-          $(".title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
-          
-        } // end of for loop
-
-      }); // end of get function
-			
+       // Search by author
+      displayBookInfo(authorApi + authorSrc);
+      
     }  else if (isbnSrc != "") {
       // Search by isbn
-      $.get(isbnApi + authorSrc + isbnSrc, function(response) {
-        console.log(response);
-        $(".title").html("");
+      displayBookInfo(isbnApi + authorSrc + isbnSrc);
+			
+    } else if (authorSrc != "" && titleSrc != "") {
+      // api for both author and title
+      // does not work yet
+      titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "+inauthor:" + authorSrc;
+    
+      displayBookInfo(titleAndAuthorApi);
+    }
+    
+  }) // end of onclick function
+
+  
+  // Genres
+  var genreNames = [".adult", ".anthologies", ".art", ".audioBooks", ".biographies", ".body", ".business", ".children", ".comics", ".contemporary", ".cooking", ".crime", ".engineering", ".entertainment", ".fantasy", ".fiction", ".food", ".general", ".health", ".history", ".horror", ".investing", ".literary", ".literature", ".manga", ".memoirs", ".mind", ".mystery", ".nonFiction", ".religion", ".romance", ".science", ".self", ".spirituality", ".sports", ".superheroes", ".technology", ".thrillers", ".travel", ".women", ".young"];
+  
+   
+  jQuery.each( genreNames, function( i, val ) {
+   click(val);
+  });
+  
+  $("#more").click(function() {
+    
+    $("#dialogBox").show();
+    $(".bookInfo").css({
+      top: '-842px'
+    });
+  });
+  
+  $("#close").click(function() {
+    $("#dialogBox").hide();
+    
+    $(".bookInfo").css({
+      top: '-250px'
+    });
+  });
+  
+  // set up click events
+  function click(genre) {
+     $(genre).click(function() {
+       var api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre;
+       var genreTitle = genre.substring(1, genre.length);
+       var genreToUppercase = genreTitle.toUpperCase();
+       
+       genreName.empty();
+       
+       genreName.append(genreToUppercase);
+       genreName.css({
+         display: 'inline'
+       });
+
+      displayGenreBookInfo(api);
+       
+     });
+  }
+  
+  // Display the books info
+  function displayBookInfo(api) {
+    
+    $.get(api, function(response) {
+      console.log(response);
+				$("#title").html("");
 
         for(i=0; i<response.items.length; i++) {
           title = response.items[i].volumeInfo.title;
 					author = response.items[i].volumeInfo.authors;
           isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
 
-          console.log(author);
-          console.log(isbn);
+          console.log(title);
 
-          $(".title").append("Title: " + title + "<br>Author: " + author + "<br>ISBN:" + isbn + "<br><br>");
+          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>ISBN: " + isbn + "<br><br>");
           
         } // end of for loop
 
       }); // end of get function
-			
-    } else if (authorSrc != "" && titleSrc != "") {
-      // api for both author and title
-      titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "+inauthor:" + authorSrc;
-      // getting books by title.
-      $.get(titleAndAuthorApi, function(response) {
-        console.log(response);
-				$(".title").html("");
+  }
+  
+  // Display the books info based on genre
+  function displayGenreBookInfo(api) {
+    
+    $.get(api, function(response) {
+      console.log(response);
+				$("#title").html("");
 
         for(i=0; i<response.items.length; i++) {
           title = response.items[i].volumeInfo.title;
@@ -80,14 +114,11 @@ $(function() {
 
           console.log(title);
 
-          $(".title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
+          $("#title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
           
         } // end of for loop
 
       }); // end of get function
-
-    }
-    
-  }) // end of onclick function
+  }
 });
 
