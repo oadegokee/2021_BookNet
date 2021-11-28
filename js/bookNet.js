@@ -90,17 +90,15 @@ $(function() {
         for(i=0; i<response.items.length; i++) {
           title = response.items[i].volumeInfo.title;
 					author = response.items[i].volumeInfo.authors;
+					desc = response.items[i].volumeInfo.description;
           isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
-
-          console.log(title);
 					
 					// Checks to see if author is missing
 					if (!author) {
 				author = "Anonymous";
 			}
 
-          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>ISBN: " + isbn + "<br><br>");
-					$(author).not("undefined");
+          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN: " + isbn + "<br><br>");
           
         } // end of for loop
 			
@@ -119,15 +117,14 @@ $(function() {
         for(i=0; i<response.items.length; i++) {
           title = response.items[i].volumeInfo.title;
 					author = response.items[i].volumeInfo.authors;
-
-          console.log(title);
+					desc = response.items[i].volumeInfo.description;
 					
 					// Checks to see if author is missing
 					if (!author) {
 				author = "Anonymous";
 			}
 
-          $("#title").append("Title: " + title + "<br>Author: " + author + "<br><br>");
+          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br><br>");
           
         } // end of for loop
 
