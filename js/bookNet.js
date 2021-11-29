@@ -93,7 +93,11 @@ $(function() {
 					desc = response.items[i].volumeInfo.description;
           isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
 					
-					// Checks to see if author is missing
+					// Checks to see if anything is missing
+					if (!title) {
+						title = "No title given";
+					}
+					
 					if (!author) {
 				author = "Anonymous";
 			}
@@ -101,6 +105,11 @@ $(function() {
 					if (!desc) {
 						desc = "No description included";
 					}
+					
+					// Does not work
+					if (!isbn) {
+						isbn = "No ISBN";
+					} 
 
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN: " + isbn + "<br><br>");
           
@@ -123,7 +132,11 @@ $(function() {
 					author = response.items[i].volumeInfo.authors;
 					desc = response.items[i].volumeInfo.description;
 					
-					// Checks to see if author is missing
+					// Checks to see if anything is missing
+					if (!title) {
+						title = "No title given";
+					}
+					
 					if (!author) {
 				author = "Anonymous";
 			}
@@ -131,7 +144,7 @@ $(function() {
 					if (!desc) {
 						desc = "No description included";
 					}
-
+					
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br><br>");
           
         } // end of for loop
