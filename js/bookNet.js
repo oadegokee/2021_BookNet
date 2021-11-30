@@ -15,7 +15,14 @@ $(function() {
     
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
-    } else if (titleSrc != "") {
+    } else if (authorSrc != "" && titleSrc != "") {
+      // api for both author and title
+      // does not work yet
+      titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc;
+
+      console.log(titleAndAuthorApi);
+      displayBookInfo(titleAndAuthorApi);
+    } else if (titleSrc != "" ) {
       displayBookInfo(titleApi + titleSrc);
 
     } else if (authorSrc != "") {
@@ -26,15 +33,9 @@ $(function() {
       // Search by isbn
       displayBookInfo(isbnApi + authorSrc + isbnSrc);
 			
-    } else if (authorSrc != "" && titleSrc != "") {
-      // api for both author and title
-      // does not work yet
-      titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "+inauthor:" + authorSrc;
+    } 
     
-      displayBookInfo(titleAndAuthorApi);
-    }
-    
-  }) // end of onclick function
+  }) // end of onclick function  
 
   
   // Genres
@@ -91,7 +92,16 @@ $(function() {
           title = response.items[i].volumeInfo.title;
 					author = response.items[i].volumeInfo.authors;
 					desc = response.items[i].volumeInfo.description;
-          isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
+          if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
+            isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
+            if (isbnArray < 2) {
+             isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+            } else {
+             isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
+            }
+          } else {
+            isbn = "No ISBN"; 
+          }
 					
 					// Checks to see if anything is missing
 					if (!title) {
