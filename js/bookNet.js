@@ -13,6 +13,8 @@ $(function() {
          display: 'none'
     });
     
+    newIsbnSrc = isbnSrc.replace(/-/g, "");
+    
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
     } else if (authorSrc != "" && titleSrc != "") {
@@ -31,7 +33,7 @@ $(function() {
       
     }  else if (isbnSrc != "") {
       // Search by isbn
-      displayBookInfo(isbnApi + authorSrc + isbnSrc);
+      displayBookInfo(isbnApi + authorSrc + newIsbnSrc);
 			
     } 
     
