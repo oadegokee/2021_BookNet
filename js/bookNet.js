@@ -99,7 +99,7 @@ $(function() {
 					desc = response.items[i].volumeInfo.description;
           if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
             isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
-            if (isbnArray < 2){
+            if (isbnArray < 2) {
              isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
              isbn2 = "No ISBN";
             } else {
