@@ -99,13 +99,16 @@ $(function() {
 					desc = response.items[i].volumeInfo.description;
           if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
             isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
-           // if (isbnArray < 2) {
+            if (isbnArray < 2){
              isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-          //  } else {
-             isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
-          //  }
+             isbn2 = "No ISBN";
+            } else {
+              isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+              isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
+            }
           } else {
             isbn = "No ISBN"; 
+            isbn2 = "No ISBN";
           }
 					
 					// Checks to see if anything is missing
