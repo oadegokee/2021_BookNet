@@ -70,6 +70,9 @@ $(function() {
        var api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre;
        var genreTitle = genre.substring(1, genre.length);
        var genreToUppercase = genreTitle.toUpperCase();
+       if (genre == ".nonFiction") {
+         genreToUppercase = "NON-FICTION";
+       }
        
        genreName.empty();
        
