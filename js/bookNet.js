@@ -99,11 +99,11 @@ $(function() {
 					desc = response.items[i].volumeInfo.description;
           if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
             isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
-            if (isbnArray < 2) {
+           // if (isbnArray < 2) {
              isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-            } else {
-             isbn = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
-            }
+          //  } else {
+             isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
+          //  }
           } else {
             isbn = "No ISBN"; 
           }
@@ -126,7 +126,7 @@ $(function() {
 						isbn = "No ISBN";
 					} 
 
-          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN: " + isbn + "<br><br>");
+          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
           
         } // end of for loop
 			
