@@ -1,12 +1,37 @@
 $(function() {
   
+	// variables
   var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:";
   var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
   var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   var genreName = $('#genreName');
 	var startIndex = (0);
 
-  $("#submit").click(function() {
+	// submission
+	($(".titleSrc").keypress(function (e) {
+		if (e.which == 13) {
+			submit();
+		}
+	}));
+	($(".authorSrc").keypress(function (e) {
+		if (e.which == 13) {
+			submit();
+		}
+	}));
+	
+	($(".isbnSrc").keypress(function (e) {
+		if (e.which == 13) {
+			submit();
+		}
+	}));
+	
+	$("#submit").click(function() {
+		submit();
+			})
+	
+	// submit action
+	function submit() {
+		
     var titleSrc = $(".titleSrc").val();
     var authorSrc = $(".authorSrc").val();
     var isbnSrc = $(".isbnSrc").val();
@@ -61,7 +86,7 @@ $(function() {
 			
     } 
     
-  }) // end of onclick function  
+} // end of submit function
 
   
   // Genres
