@@ -4,6 +4,7 @@ $(function() {
   var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
   var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   var genreName = $('#genreName');
+	var startIndex = (0);
 
   $("#submit").click(function() {
     var titleSrc = $(".titleSrc").val();
@@ -24,12 +25,35 @@ $(function() {
 
       console.log(titleAndAuthorApi);
       displayBookInfo(titleAndAuthorApi);
+			
     } else if (titleSrc != "" ) {
       displayBookInfo(titleApi + titleSrc);
+			
+			// Next page
+			$(".nextBtn").click(function() {
+				api = titleApi + titleSrc + "&startIndex=";
+		
+				startIndex = startIndex + 10;
+				api = api + (startIndex);
+				
+				displayBookInfo(api);
+
+		}) // end of next page button
 
     } else if (authorSrc != "") {
        // Search by author
       displayBookInfo(authorApi + authorSrc);
+			
+			// Next page
+			$(".nextBtn").click(function() {
+				api = authorApi + authorSrc + "&startIndex=";
+		
+				startIndex = startIndex + 10;
+				api = api + (startIndex);
+				
+				displayBookInfo(api);
+
+		}) // end of next page button
       
     }  else if (isbnSrc != "") {
       // Search by isbn
@@ -82,8 +106,23 @@ $(function() {
        });
 
       displayGenreBookInfo(api);
+			 
+			 		// Next page
+			$(".nextBtn").click(function() {
+				api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre + "&startIndex=";
+		
+				startIndex = startIndex + 10;
+				api = api + (startIndex);
+				
+				displayGenreBookInfo(api);
+
+		}) // end of next page button
        
      });
+		
+
+		
+		
   }
   
   // Display the books info
@@ -133,9 +172,9 @@ $(function() {
           
         } // end of for loop
 			
-			
 
       }); // end of get function
+		
   }
   
   // Display the books info based on genre
@@ -169,5 +208,6 @@ $(function() {
 
       }); // end of get function
   }
+	
 });
 

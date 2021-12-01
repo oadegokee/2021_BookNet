@@ -15,6 +15,11 @@
     <input class="isbnSrc" type="text" placeholder="ISBN">
     <button type="submit" id="submit">Search</button>
   </div>
+	
+	<div class="nextDiv">
+			<button class="nextBtn">Next Page</button>
+	</div>
+    
   
   <div class="genres">
     <h2 genresLabel>GENRES</h2>
@@ -26,7 +31,8 @@
     </div>
     
     <h3 id="more">More</h3>
-    
+		
+		
     
     <div id="dialogBox">
        <div id="closeBtn">
@@ -77,12 +83,17 @@
     
   </div>
 
-  
+ 
   <div class="bookInfo">
     <h1 id="genreName" style="display: none"></h1>
-    <h3 id="title"></h3>
+		<div class="row">
+			<h3 id="title"></h3>
+		</div>
     <img id="bookCover" src="" alt="">
   </div>
+
+	
+	
   
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
