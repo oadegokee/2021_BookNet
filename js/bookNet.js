@@ -6,6 +6,7 @@ $(function() {
   var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   var genreName = $('#genreName');
 	var startIndex = (0);
+	var genreClicked = false;
 	
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
@@ -48,7 +49,7 @@ $(function() {
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
 			
-    } else if ((typeof !titleSrc) && (typeof !authorSrc) && (typeof !isbnSrc)){
+    } else if ((titleSrc = undefined) && (authorSrc = undefined) && (isbnSrc = undefined)){
 			alert("Please enter a valid title, author, or ISBN");
 			
 			$(".titleSrc").val("");
@@ -61,11 +62,20 @@ $(function() {
 				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc;
 				
 				displayBookInfo(titleAndAuthorApi);
-				displayMoreBooks(titleAndAuthorApi, startIndex);
+				
+				if (genreClicked == false) {
+					displayMoreBooks(titleAndAuthorApi, startIndex);
+				}
+				
 			
 			} else if (titleSrc != "" ) {
 				displayBookInfo(titleApi + titleSrc);
-				displayMoreBooks(titleApi + titleSrc, startIndex);
+				
+				if (genreClicked == false) {
+					displayMoreBooks(titleApi + titleSrc, startIndex);
+				}
+				
+				
 
 			} else if (authorSrc != "") {
 				 // Search by author
@@ -129,6 +139,8 @@ $(function() {
        });
 
        displayBookInfo(api);
+			 genreClicked = true;
+			 
 			 displayMoreBooks(api, startIndex);
 			 
      });
@@ -177,6 +189,8 @@ $(function() {
 				} 
 
 				$("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
+				
+				genreClicked = false;
 
 				$(".titleSrc").val("");
 				$(".authorSrc").val("");
