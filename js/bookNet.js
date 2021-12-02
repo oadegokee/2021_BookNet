@@ -45,11 +45,21 @@ $(function() {
         alert("Please enter a title, author, or ISBN");
     } else if (authorSrc != "" && titleSrc != "") {
       // api for both author and title
-      // does not work yet
       titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc;
 
       console.log(titleAndAuthorApi);
       displayBookInfo(titleAndAuthorApi);
+			
+			// Next page
+			$(".nextBtn").click(function() {
+				api = authorApi + authorSrc + "&startIndex=";
+		
+				startIndex = startIndex + 10;
+				api = api + (startIndex);
+				
+				displayBookInfo(api);
+
+		}) // end of next page button
 			
     } else if (titleSrc != "" ) {
       displayBookInfo(titleApi + titleSrc);
@@ -64,6 +74,7 @@ $(function() {
 				displayBookInfo(api);
 
 		}) // end of next page button
+			
 
     } else if (authorSrc != "") {
        // Search by author
@@ -79,12 +90,14 @@ $(function() {
 				displayBookInfo(api);
 
 		}) // end of next page button
-      
+			
+			
     }  else if (isbnSrc != "") {
       // Search by isbn
       displayBookInfo(isbnApi + authorSrc + newIsbnSrc);
 			
-    } 
+    }
+		
     
 } // end of submit function
 
@@ -181,19 +194,22 @@ $(function() {
 					}
 					
 					if (!author) {
-				author = "Anonymous";
-			}
+						author = "Anonymous";
+					}
 					
 					if (!desc) {
 						desc = "No description included";
 					}
 					
-					// Does not work
 					if (!isbn) {
 						isbn = "No ISBN";
 					} 
 
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
+					
+					$(".titleSrc").val("");
+      		$(".authorSrc").val("");
+					$(".isbnSrc").val("");
           
         } // end of for loop
 			
@@ -220,14 +236,19 @@ $(function() {
 					}
 					
 					if (!author) {
-				author = "Anonymous";
-			}
+						author = "Anonymous";
+					}
 					
 					if (!desc) {
 						desc = "No description included";
 					}
 					
           $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br><br>");
+					
+					// Doesn't fix the problem with genre
+					$(".titleSrc").val("");
+      		$(".authorSrc").val("");
+					$(".isbnSrc").val("");
           
         } // end of for loop
 
