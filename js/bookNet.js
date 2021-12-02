@@ -48,7 +48,13 @@ $(function() {
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
 			
-    } else {
+    } else if ((typeof !titleSrc) && (typeof !authorSrc) && (typeof !isbnSrc)){
+			alert("Please enter a valid title, author, or ISBN");
+			
+			$(".titleSrc").val("");
+			$(".authorSrc").val("");
+			$(".isbnSrc").val("");
+		} else {
 			
 		  if (authorSrc != "" && titleSrc != "") {
 				// api for both author and title
