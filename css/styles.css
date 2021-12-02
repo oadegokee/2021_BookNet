@@ -52,6 +52,7 @@
 }
 
 .nextBtn {
+	display: none;
 	float: right;
 	margin-right: 100px;
 	border: none;

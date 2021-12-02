@@ -6,6 +6,10 @@ $(function() {
   var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   var genreName = $('#genreName');
 	var startIndex = (0);
+	
+	// Displays random books without any search
+  var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
+  displayBookInfo(randomBooksApi);
 
 	// submission
 	($(".titleSrc").keypress(function (e) {
@@ -27,7 +31,7 @@ $(function() {
 	
 	$("#submit").click(function() {
 		submit();
-			})
+	});
 	
 	// submit action
 	function submit() {
@@ -43,62 +47,34 @@ $(function() {
     
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
-    } else if (authorSrc != "" && titleSrc != "") {
-      // api for both author and title
-      titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc;
-
-      console.log(titleAndAuthorApi);
-      displayBookInfo(titleAndAuthorApi);
 			
-			// Next page
-			$(".nextBtn").click(function() {
-				api = authorApi + authorSrc + "&startIndex=";
-		
-				startIndex = startIndex + 10;
-				api = api + (startIndex);
+    } else {
+			
+		  if (authorSrc != "" && titleSrc != "") {
+				// api for both author and title
+				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc;
 				
-				displayBookInfo(api);
+				displayBookInfo(titleAndAuthorApi);
+				displayMoreBooks(titleAndAuthorApi, startIndex);
+			
+			} else if (titleSrc != "" ) {
+				displayBookInfo(titleApi + titleSrc);
+				displayMoreBooks(titleApi + titleSrc, startIndex);
 
-		}) // end of next page button
-			
-    } else if (titleSrc != "" ) {
-      displayBookInfo(titleApi + titleSrc);
-			
-			// Next page
-			$(".nextBtn").click(function() {
-				api = titleApi + titleSrc + "&startIndex=";
-		
-				startIndex = startIndex + 10;
-				api = api + (startIndex);
+			} else if (authorSrc != "") {
+				 // Search by author
+				displayBookInfo(authorApi + authorSrc);
+				displayMoreBooks(authorApi + authorSrc, startIndex);
 				
-				displayBookInfo(api);
-
-		}) // end of next page button
+			}  else if (isbnSrc != "") {
+				// Search by isbn
+				displayBookInfo(isbnApi + authorSrc + newIsbnSrc);
+			}  
 			
-
-    } else if (authorSrc != "") {
-       // Search by author
-      displayBookInfo(authorApi + authorSrc);
-			
-			// Next page
-			$(".nextBtn").click(function() {
-				api = authorApi + authorSrc + "&startIndex=";
+			// Show the next page button
+			$(".nextBtn").css("display", "inline");
+		}
 		
-				startIndex = startIndex + 10;
-				api = api + (startIndex);
-				
-				displayBookInfo(api);
-
-		}) // end of next page button
-			
-			
-    }  else if (isbnSrc != "") {
-      // Search by isbn
-      displayBookInfo(isbnApi + authorSrc + newIsbnSrc);
-			
-    }
-		
-    
 } // end of submit function
 
   
@@ -111,8 +87,8 @@ $(function() {
   });
   
   $("#more").click(function() {
-    
     $("#dialogBox").show();
+		
     $(".bookInfo").css({
       top: '-842px'
     });
@@ -136,6 +112,9 @@ $(function() {
          genreToUppercase = "NON-FICTION";
        }
        
+			 // Show the next page button
+			 $(".nextBtn").css("display", "inline");
+			 
        genreName.empty();
        
        genreName.append(genreToUppercase);
@@ -143,24 +122,10 @@ $(function() {
          display: 'inline'
        });
 
-      displayGenreBookInfo(api);
+       displayBookInfo(api);
+			 displayMoreBooks(api, startIndex);
 			 
-			 		// Next page
-			$(".nextBtn").click(function() {
-				api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre + "&startIndex=";
-		
-				startIndex = startIndex + 10;
-				api = api + (startIndex);
-				
-				displayGenreBookInfo(api);
-
-		}) // end of next page button
-       
      });
-		
-
-		
-		
   }
   
   // Display the books info
@@ -168,92 +133,79 @@ $(function() {
     
     $.get(api, function(response) {
       console.log(response);
-				$("#title").html("");
+			$("#title").html("");
 
-        for(i=0; i<response.items.length; i++) {
-          title = response.items[i].volumeInfo.title;
-					author = response.items[i].volumeInfo.authors;
-					desc = response.items[i].volumeInfo.description;
-          if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
-            isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
-            if (isbnArray < 2) {
-             isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-             isbn2 = "No ISBN";
-            } else {
-              isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-              isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
-            }
-          } else {
-            isbn = "No ISBN"; 
-            isbn2 = "No ISBN";
-          }
-					
-					// Checks to see if anything is missing
-					if (!title) {
-						title = "No title given";
+			for(i=0; i<response.items.length; i++) {
+				title = response.items[i].volumeInfo.title;
+				author = response.items[i].volumeInfo.authors;
+				desc = response.items[i].volumeInfo.description;
+				if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
+					isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
+					if (isbnArray < 2) {
+					 isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+					 isbn2 = "No ISBN";
+					} else {
+						isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+						isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
 					}
-					
-					if (!author) {
-						author = "Anonymous";
-					}
-					
-					if (!desc) {
-						desc = "No description included";
-					}
-					
-					if (!isbn) {
-						isbn = "No ISBN";
-					} 
+				} else {
+					isbn = "No ISBN"; 
+					isbn2 = "No ISBN";
+				}
 
-          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
-					
-					$(".titleSrc").val("");
-      		$(".authorSrc").val("");
-					$(".isbnSrc").val("");
-          
-        } // end of for loop
+				// Checks to see if anything is missing
+				if (!title) {
+					title = "No title given";
+				}
+
+				if (!author) {
+					author = "Anonymous";
+				}
+
+				if (!desc) {
+					desc = "No description included";
+				}
+
+				if (!isbn) {
+					isbn = "No ISBN";
+				} 
+
+				$("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
+
+				$(".titleSrc").val("");
+				$(".authorSrc").val("");
+				$(".isbnSrc").val("");
+				
+			} // end of for loop
 			
-
-      }); // end of get function
+		}); // end of get function
 		
-  }
-  
-  // Display the books info based on genre
-  function displayGenreBookInfo(api) {
+	}
+	
+	// Function to display more books
+  function displayMoreBooks(api, startIndex) {
     
-    $.get(api, function(response) {
-      console.log(response);
-				$("#title").html("");
+    // Next page
+    $(".nextBtn").click(function() {
+      
+      startIndex = startIndex + 10;
+      newApi = api + "&startIndex=" + (startIndex);
 
-        for(i=0; i<response.items.length; i++) {
-          title = response.items[i].volumeInfo.title;
-					author = response.items[i].volumeInfo.authors;
-					desc = response.items[i].volumeInfo.description;
-					
-					// Checks to see if anything is missing
-					if (!title) {
-						title = "No title given";
-					}
-					
-					if (!author) {
-						author = "Anonymous";
-					}
-					
-					if (!desc) {
-						desc = "No description included";
-					}
-					
-          $("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br><br>");
-					
-					// Doesn't fix the problem with genre
-					$(".titleSrc").val("");
-      		$(".authorSrc").val("");
-					$(".isbnSrc").val("");
-          
-        } // end of for loop
+      displayBookInfo(newApi);
+      
+      console.log(newApi);
 
-      }); // end of get function
+    }); // end of next page button
+    
   }
 	
+	// Function to return random letters
+  function randomBooks() {
+    var array = "abcdefghijklmnopqrstuvwxyz".split("");
+    var randomLetter = array[(Math.random() * array.length) | 0];
+    
+    return randomLetter;
+  } 
+  
 });
 
