@@ -144,13 +144,15 @@ $(function() {
 			if (response.totalItems == 0) {
 				alert("Please enter a valid title, author, or ISBN");
 			} else {
-				
-			
 
 			for(i=0; i<response.items.length; i++) {
 				title = response.items[i].volumeInfo.title;
 				author = response.items[i].volumeInfo.authors;
 				desc = response.items[i].volumeInfo.description;
+				imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
+				var image = new Image();
+				image.src = imageLink;
+				
 				if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
 					isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
 					if (isbnArray < 2) {
@@ -182,7 +184,9 @@ $(function() {
 					isbn = "No ISBN";
 				} 
 
-				$("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
+				$("#title").append("<br><br><br>Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br>");
+				$(image).appendTo("#title");
+				
 				
 
 				$(".titleSrc").val("");
