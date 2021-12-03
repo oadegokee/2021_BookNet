@@ -6,7 +6,6 @@ $(function() {
   var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   var genreName = $('#genreName');
 	var startIndex = (0);
-	var genreClicked = false;
 	
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
@@ -48,13 +47,7 @@ $(function() {
     
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
-			
-    } else if ((titleSrc = undefined) && (authorSrc = undefined) && (isbnSrc = undefined)){
-			alert("Please enter a valid title, author, or ISBN");
-			
-			$(".titleSrc").val("");
-			$(".authorSrc").val("");
-			$(".isbnSrc").val("");
+		
 		} else {
 			
 		  if (authorSrc != "" && titleSrc != "") {
@@ -63,18 +56,13 @@ $(function() {
 				
 				displayBookInfo(titleAndAuthorApi);
 				
-				if (genreClicked == false) {
-					displayMoreBooks(titleAndAuthorApi, startIndex);
-				}
-				
+				displayMoreBooks(titleAndAuthorApi, startIndex);
+
 			
 			} else if (titleSrc != "" ) {
 				displayBookInfo(titleApi + titleSrc);
 				
-				if (genreClicked == false) {
-					displayMoreBooks(titleApi + titleSrc, startIndex);
-				}
-				
+				displayMoreBooks(titleApi + titleSrc, startIndex);
 				
 
 			} else if (authorSrc != "") {
@@ -139,9 +127,9 @@ $(function() {
        });
 
        displayBookInfo(api);
-			 genreClicked = true;
 			 
-			 displayMoreBooks(api, startIndex);
+				displayMoreBooks(api, startIndex);
+
 			 
      });
   }
@@ -152,6 +140,12 @@ $(function() {
     $.get(api, function(response) {
       console.log(response);
 			$("#title").html("");
+			
+			if (response.totalItems == 0) {
+				alert("Please enter a valid title, author, or ISBN");
+			} else {
+				
+			
 
 			for(i=0; i<response.items.length; i++) {
 				title = response.items[i].volumeInfo.title;
@@ -190,13 +184,13 @@ $(function() {
 
 				$("#title").append("Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br><br>");
 				
-				genreClicked = false;
 
 				$(".titleSrc").val("");
 				$(".authorSrc").val("");
 				$(".isbnSrc").val("");
 				
 			} // end of for loop
+			}
 			
 		}); // end of get function
 		
