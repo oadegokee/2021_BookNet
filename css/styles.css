@@ -1,6 +1,13 @@
 #websiteTitle {
   font-size: 100px;
   text-align: center;
+	width: 400px;
+	margin: auto;
+	
+}
+
+#websiteTitle:hover {
+	cursor: pointer;
 }
 
 .search {
@@ -10,7 +17,7 @@
 
 .genres {
   position: relative;
-  top: -250px;
+  top: -150px;
   width: 100px;
 }
 

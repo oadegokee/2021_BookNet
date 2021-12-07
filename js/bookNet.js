@@ -10,6 +10,12 @@ $(function() {
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
   displayBookInfo(randomBooksApi);
+	
+	// Go back to the home page when the user clicks on the logo
+	$('#websiteTitle').click(function() {
+		window.location.reload();
+	});
+	
 
 	// submission
 	($(".titleSrc").keypress(function (e) {
