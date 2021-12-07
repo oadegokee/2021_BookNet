@@ -98,6 +98,7 @@ $(function() {
     });
   });
   
+  
   // mouse over
 $("#more").hover(function() {
   $("#moreGenres").show();
