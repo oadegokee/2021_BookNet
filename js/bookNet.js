@@ -162,7 +162,8 @@ $("#more").hover(function() {
 				desc = response.items[i].volumeInfo.description;
 				imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
 				var image = new Image();
-				image.src = imageLink;
+				newLink = imageLink.replace("http://", "https://");
+				image.src = newLink;
 				
 				if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
 					isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
@@ -194,7 +195,7 @@ $("#more").hover(function() {
 				if (!isbn) {
 					isbn = "No ISBN";
 				} 
-
+				
 				$("#title").append("<br><br><br>Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br>");
 				$(image).appendTo("#title");
 				
