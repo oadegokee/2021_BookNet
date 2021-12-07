@@ -61,3 +61,11 @@
 	
 }
 
+#moreGenres {
+  display: none;
+  font-size: small;
+  color: gray;
+  position:relative;
+  padding: 0;
+}
+

@@ -98,6 +98,16 @@ $(function() {
     });
   });
   
+  // mouse over
+$("#more").hover(function() {
+  $("#moreGenres").show();
+}, function() {
+  $("#moreGenres").hide();
+  $(".bookInfo").css({
+    top: '-250px'
+  });
+});
+
   $("#close").click(function() {
     $("#dialogBox").hide();
     
