@@ -160,9 +160,15 @@ $("#more").hover(function() {
 				title = response.items[i].volumeInfo.title;
 				author = response.items[i].volumeInfo.authors;
 				desc = response.items[i].volumeInfo.description;
-				imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
+				
+				if (response.items[i].volumeInfo.hasOwnProperty('imageLinks')) {
+					imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
+					newLink = imageLink.replace("http://", "https://");
+				} else {
+					newLink = "images/ImageNotAvailable.png";
+				}
+				
 				var image = new Image();
-				newLink = imageLink.replace("http://", "https://");
 				image.src = newLink;
 				
 				if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
