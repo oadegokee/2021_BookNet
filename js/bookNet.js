@@ -1,9 +1,6 @@
 $(function() {
   
 	// variables
-  var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:";
-  var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
-  var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   var genreName = $('#genreName');
 	var startIndex = (0);
 	
@@ -58,27 +55,26 @@ $(function() {
 			
 		  if (authorSrc != "" && titleSrc != "") {
 				// api for both author and title
-				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc;
+				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc + "&maxResults=30";
 				
 				displayBookInfo(titleAndAuthorApi);
-				
 				displayMoreBooks(titleAndAuthorApi, startIndex);
 
 			
 			} else if (titleSrc != "" ) {
-				displayBookInfo(titleApi + titleSrc);
+				var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "&maxResults=30";
 				
-				displayMoreBooks(titleApi + titleSrc, startIndex);
+				displayBookInfo(titleApi);
+				displayMoreBooks(titleApi, startIndex);
 				
-
 			} else if (authorSrc != "") {
-				 // Search by author
-				displayBookInfo(authorApi + authorSrc);
-				displayMoreBooks(authorApi + authorSrc, startIndex);
+				var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + authorSrc + "&maxResults=30";
+				displayBookInfo(authorApi);
+				displayMoreBooks(authorApi, startIndex);
 				
 			}  else if (isbnSrc != "") {
-				// Search by isbn
-				displayBookInfo(isbnApi + authorSrc + newIsbnSrc);
+				var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + newIsbnSrc + "&maxResults=30";
+				displayBookInfo(isbnApi);
 			}  
 			
 			// Show the next page button
@@ -126,7 +122,8 @@ $("#more").hover(function() {
   // set up click events
   function click(genre) {
      $(genre).click(function() {
-       var api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre;
+			 
+       var api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre + "&maxResults=30";
        var genreTitle = genre.substring(1, genre.length);
        var genreToUppercase = genreTitle.toUpperCase();
        if (genre == ".nonFiction") {
@@ -145,7 +142,7 @@ $("#more").hover(function() {
 
        displayBookInfo(api);
 			 
-				displayMoreBooks(api, startIndex);
+			 displayMoreBooks(api, startIndex);
 
 			 
      });
@@ -156,68 +153,87 @@ $("#more").hover(function() {
     
     $.get(api, function(response) {
       console.log(response);
-			$("#title").html("");
+			$(".booksContainer").html("");
+			
 			
 			if (response.totalItems == 0) {
 				alert("Please enter a valid title, author, or ISBN");
 			} else {
 
-			for(i=0; i<response.items.length; i++) {
-				title = response.items[i].volumeInfo.title;
-				author = response.items[i].volumeInfo.authors;
-				desc = response.items[i].volumeInfo.description;
-				
-				if (response.items[i].volumeInfo.hasOwnProperty('imageLinks')) {
-					imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
-					newLink = imageLink.replace("http://", "https://");
-				} else {
-					newLink = "images/ImageNotAvailable.png";
-				}
-				
-				var image = new Image();
-				image.src = newLink;
-				
-				if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
-					isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
-					if (isbnArray < 2) {
-					 isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-					 isbn2 = "No ISBN";
+				for(i=0; i<response.items.length; i++) {
+					title = response.items[i].volumeInfo.title;
+					author = response.items[i].volumeInfo.authors;
+					desc = response.items[i].volumeInfo.description;
+
+					if (response.items[i].volumeInfo.hasOwnProperty('imageLinks')) {
+						imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
+						newLink = imageLink.replace("http://", "https://");
 					} else {
-						isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-						isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
+						newLink = "images/ImageNotAvailable.png";
 					}
-				} else {
-					isbn = "No ISBN"; 
-					isbn2 = "No ISBN";
-				}
+					
+					var booksContainer = $(".booksContainer");
+					var image = new Image();
+					
+					image.src = newLink;
+					
 
-				// Checks to see if anything is missing
-				if (!title) {
-					title = "No title given";
-				}
+					if (response.items[i].volumeInfo.hasOwnProperty('industryIdentifiers')) {
+						isbnArray = response.items[i].volumeInfo.industryIdentifiers.length;
+						if (isbnArray < 2) {
+						 isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+						 isbn2 = "No ISBN";
+						} else {
+							isbn = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+							isbn2 = response.items[i].volumeInfo.industryIdentifiers[1].identifier;
+						}
+					} else {
+						isbn = "No ISBN"; 
+						isbn2 = "No ISBN";
+					}
 
-				if (!author) {
-					author = "Anonymous";
-				}
+					// Checks to see if anything is missing
+					if (!title) {
+						title = "No title given";
+					}
 
-				if (!desc) {
-					desc = "No description included";
-				}
+					if (!author) {
+						author = "Anonymous";
+					}
 
-				if (!isbn) {
-					isbn = "No ISBN";
-				} 
-				
-				$("#title").append("<br><br><br>Title: " + title + "<br>Author: " + author + "<br>Description: " + desc.split(" ", 10).join(" ") + "..<br>ISBN_10: " + isbn + " " + "<br>ISBN_13: "+ isbn2 + "<br>");
-				$(image).appendTo("#title");
-				
-				
+					if (!desc) {
+						desc = "No description included";
+					}
 
-				$(".titleSrc").val("");
-				$(".authorSrc").val("");
-				$(".isbnSrc").val("");
-				
-			} // end of for loop
+					if (!isbn) {
+						isbn = "No ISBN";
+					} 
+					
+					var bookDiv = $("<div class=\"book\"></div>");
+
+					var bookContentDiv = $("<div class=\"bookContent\"></div>");
+					bookContentDiv.append(image);
+					
+					var innerDiv =  $("<div></div>");
+					
+					innerDiv.append("<p id=\"title\">Title: " + title + "</p>");
+					innerDiv.append("<p id=\"author\">Author: " + author + "</p>");
+					innerDiv.append("<p id=\"description\">Description: " + desc.split(" ", 10).join(" ") + "...</h3>");
+					innerDiv.append("<p id=\"isbn10\">ISBN_10: " + isbn + "</p>");
+					innerDiv.append("<p id=\"isbn13\">ISBN_13: " + isbn2 + "</p>");
+					
+					bookContentDiv.append(innerDiv);
+					bookDiv.append(bookContentDiv);
+					
+					booksContainer.append(bookDiv);
+
+
+					$(".titleSrc").val("");
+					$(".authorSrc").val("");
+					$(".isbnSrc").val("");
+					
+				} // end of for loop
+		
 			}
 			
 		}); // end of get function

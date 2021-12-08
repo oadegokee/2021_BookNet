@@ -25,12 +25,31 @@
   cursor: pointer;
 }
 
-.bookInfo {
+.booksContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.book {
+    width: 400px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.bookContent {
+    display: flex;
+}
+
+.book img {
+    margin-right: 10px;
+}
+
+#genreName {
   position: relative;
-  width: 300px;
+  width: 210px;
   left: 100px;
-  top: -250px;
-	overflow: auto;
 }
 
 #dialogBox {
@@ -75,4 +94,5 @@
   position:relative;
   padding: 0;
 }
+
 
