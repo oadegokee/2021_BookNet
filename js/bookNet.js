@@ -38,7 +38,6 @@ $(function() {
 	
 	// submit action
 	function submit() {
-		
     var titleSrc = $(".titleSrc").val();
     var authorSrc = $(".authorSrc").val();
     var isbnSrc = $(".isbnSrc").val();
@@ -62,6 +61,7 @@ $(function() {
 
 			
 			} else if (titleSrc != "" ) {
+
 				var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "&maxResults=30";
 				
 				displayBookInfo(titleApi);
@@ -77,8 +77,9 @@ $(function() {
 				displayBookInfo(isbnApi);
 			}  
 			
-			// Show the next page button
-			$(".nextBtn").css("display", "inline");
+			$(".nextSearchBtn").css("display", "inline");
+			$(".nextGenreBtn").css("display", "none");
+			
 		}
 		
 } // end of submit function
@@ -131,7 +132,8 @@ $("#more").hover(function() {
        }
        
 			 // Show the next page button
-			 $(".nextBtn").css("display", "inline");
+			 $(".nextGenreBtn").css("display", "inline");
+			 $(".nextSearchBtn").css("display", "none");
 			 
        genreName.empty();
        
@@ -143,6 +145,10 @@ $("#more").hover(function() {
        displayBookInfo(api);
 			 
 			 displayMoreBooks(api, startIndex);
+
+			displayMoreGenreBooks(api, startIndex);
+			 
+
 
 			 
      });
@@ -171,6 +177,7 @@ $("#more").hover(function() {
 					} else {
 						newLink = "images/ImageNotAvailable.png";
 					}
+
 					
 					var booksContainer = $(".booksContainer");
 					var image = new Image();
@@ -226,25 +233,38 @@ $("#more").hover(function() {
 					bookDiv.append(bookContentDiv);
 					
 					booksContainer.append(bookDiv);
-
-
-					$(".titleSrc").val("");
-					$(".authorSrc").val("");
-					$(".isbnSrc").val("");
 					
 				} // end of for loop
-		
+
 			}
 			
-		}); // end of get function
+		} // end of get function
 		
-	}
+	)};
 	
 	// Function to display more books
   function displayMoreBooks(api, startIndex) {
     
     // Next page
-    $(".nextBtn").click(function() {
+    $(".nextSearchBtn").click(function() {
+      
+      startIndex = startIndex + 10;
+      newApi = api + "&startIndex=" + (startIndex);
+
+      displayBookInfo(newApi);
+      
+      console.log(newApi);
+
+    }); // end of next page button
+		
+		
+  }
+	
+	// Function to display more genre books
+  function displayMoreGenreBooks(api, startIndex) {
+		
+		// Next page
+    $(".nextGenreBtn").click(function() {
       
       startIndex = startIndex + 10;
       newApi = api + "&startIndex=" + (startIndex);
