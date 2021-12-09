@@ -161,7 +161,6 @@ $("#more").hover(function() {
       console.log(response);
 			$(".booksContainer").html("");
 			
-			
 			if (response.totalItems == 0) {
 				alert("Please enter a valid title, author, or ISBN");
 			} else {
@@ -248,14 +247,23 @@ $("#more").hover(function() {
     // Next page
     $(".nextSearchBtn").click(function() {
       
-      startIndex = startIndex + 10;
-      newApi = api + "&startIndex=" + (startIndex);
+      startIndex = startIndex + 30;
+			
+      if (startIndex >= 200) {
+					alert("You are on the last page");
+					} else {
+						newApi = api + "&startIndex=" + (startIndex);
 
-      displayBookInfo(newApi);
+      		displayBookInfo(newApi);
       
-      console.log(newApi);
+      		console.log(newApi);
+					}
+			
+		 
 
     }); // end of next page button
+		
+		
 		
 		
   }
@@ -266,12 +274,19 @@ $("#more").hover(function() {
 		// Next page
     $(".nextGenreBtn").click(function() {
       
-      startIndex = startIndex + 10;
-      newApi = api + "&startIndex=" + (startIndex);
+      startIndex = startIndex + 30;
+			
+			if (startIndex >= 200) {
+					alert("You are on the last page")
+					} else {
+						newApi = api + "&startIndex=" + (startIndex);
 
-      displayBookInfo(newApi);
+      		displayBookInfo(newApi);
       
-      console.log(newApi);
+      		console.log(newApi);
+					}
+			
+      
 
     }); // end of next page button
     
