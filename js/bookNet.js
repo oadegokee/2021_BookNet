@@ -5,6 +5,7 @@ $(function() {
 	var startIndex = (0);
 	var nextDiv = $(".nextDiv");
 	var nextPageButton = "";
+	var backPageButton = "";
 	
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
@@ -60,8 +61,12 @@ $(function() {
 				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc + "&maxResults=30";
 				
 				nextDiv.empty();
+				backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
 				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				
 				nextDiv.append(nextPageButton);
+				nextDiv.append(backPageButton);
+				
 				
 				displayBookInfo(titleAndAuthorApi);
 				displayMoreBooks(titleAndAuthorApi, startIndex, nextPageButton);
@@ -73,8 +78,12 @@ $(function() {
 				var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "&maxResults=30";
 				
 				nextDiv.empty();
+				backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
 				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				
 				nextDiv.append(nextPageButton);
+				nextDiv.append(backPageButton);
+				
 				
 				displayBookInfo(titleApi);
 				displayMoreBooks(titleApi, startIndex, nextPageButton);
@@ -84,8 +93,11 @@ $(function() {
 				var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + authorSrc + "&maxResults=30";
 				
 				nextDiv.empty();
+				backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
 				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				
 				nextDiv.append(nextPageButton);
+				nextDiv.append(backPageButton);
 				
 				displayBookInfo(authorApi);
 				displayMoreBooks(authorApi, startIndex, nextPageButton);
@@ -179,8 +191,11 @@ $("#more").hover(function() {
        });
 			 
 			 nextDiv.empty();
+			 backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
 			 nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				
 			 nextDiv.append(nextPageButton);
+			 nextDiv.append(backPageButton);
 
        displayBookInfo(api);
 			 
@@ -286,6 +301,7 @@ $("#more").hover(function() {
 			
       if (startIndex >= 200) {
 					alert("You are on the last page");
+					startIndex = startIndex - 30;
 					} else {
 						newApi = api + "&startIndex=" + (startIndex);
 
@@ -295,6 +311,23 @@ $("#more").hover(function() {
 					}
 
     }); // end of next page button
+		
+		// Back page
+    $(backPageButton).click(function() {
+      startIndex = startIndex - 30;
+			
+      if (startIndex < 0) {
+						alert("You are on the first page");
+						startIndex = startIndex + 30;
+					} else {
+						newApi = api + "&startIndex=" + (startIndex);
+
+      		displayBookInfo(newApi);
+      
+      		console.log(newApi);
+					}
+
+    }); // end of back page button
 		
   }
 	

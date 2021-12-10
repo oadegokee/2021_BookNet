@@ -87,6 +87,14 @@
 	
 }
 
+.backBtn {
+	float: right;
+	border: none;
+	cursor: pointer;
+	background-color: inherit;
+	
+}
+
 #moreGenres {
   display: none;
   font-size: small;
