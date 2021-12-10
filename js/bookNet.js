@@ -8,6 +8,7 @@ $(function() {
 	
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
+	sorting(randomBooksApi);
   displayBookInfo(randomBooksApi);
 	
 	// Go back to the home page when the user clicks on the logo
@@ -64,6 +65,7 @@ $(function() {
 				
 				displayBookInfo(titleAndAuthorApi);
 				displayMoreBooks(titleAndAuthorApi, startIndex, nextPageButton);
+				sorting(titleAndAuthorApi);
 
 			
 			} else if (titleSrc != "" ) {
@@ -76,6 +78,7 @@ $(function() {
 				
 				displayBookInfo(titleApi);
 				displayMoreBooks(titleApi, startIndex, nextPageButton);
+				sorting(titleApi);
 				
 			} else if (authorSrc != "") {
 				var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + authorSrc + "&maxResults=30";
@@ -86,6 +89,7 @@ $(function() {
 				
 				displayBookInfo(authorApi);
 				displayMoreBooks(authorApi, startIndex, nextPageButton);
+				sorting(authorApi);
 				
 			}  else if (isbnSrc != "") {
 				var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + newIsbnSrc + "&maxResults=30";
@@ -98,6 +102,27 @@ $(function() {
 		}
 		
 } // end of submit function
+	
+	// Sorting button
+	function sorting(api) {
+		$(".newest").click(function() {
+			newApi = api + "&orderBy=newest";
+			$(".newest").html("Newest ✓");
+			$(".relevance").html("Relevance");
+			
+			displayBookInfo(newApi);
+			console.log(newApi);
+		})
+		
+		$(".relevance").click(function() {
+			newApi = api + "&orderBy=relevance";
+			$(".newest").html("Newest");
+			$(".relevance").html("Relevance ✓");
+			
+			displayBookInfo(newApi);
+			console.log(newApi);
+		})
+	}
 
   
   // Genres
@@ -145,11 +170,7 @@ $("#more").hover(function() {
        if (genre == ".nonFiction") {
          genreToUppercase = "NON-FICTION";
        }
-       
-			 // Show the next page button
-			 $(".nextGenreBtn").css("display", "inline");
-			 $(".nextSearchBtn").css("display", "none");
-			 
+
        genreName.empty();
        
        genreName.append(genreToUppercase);
@@ -227,8 +248,9 @@ $("#more").hover(function() {
 
 					if (!isbn) {
 						isbn = "No ISBN";
-					} 
-					
+					}
+		
+					// Display
 					var bookDiv = $("<div class=\"book\"></div>");
 
 					var bookContentDiv = $("<div class=\"bookContent\"></div>");
@@ -260,7 +282,6 @@ $("#more").hover(function() {
     
     // Next page
     $(nextPageButton).click(function() {
-      
       startIndex = startIndex + 30;
 			
       if (startIndex >= 200) {
@@ -276,6 +297,7 @@ $("#more").hover(function() {
     }); // end of next page button
 		
   }
+	
 	
 	// Function to return random letters
   function randomBooks() {
