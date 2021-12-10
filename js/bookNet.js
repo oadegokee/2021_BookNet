@@ -294,12 +294,14 @@ $("#more").hover(function() {
 	
 	// Function to display more books
   function displayMoreBooks(api, startIndex, nextPageButton) {
+		
+		$.get(api, function(response) {
     
     // Next page
     $(nextPageButton).click(function() {
       startIndex = startIndex + 30;
 			
-      if (startIndex >= 200) {
+      if (startIndex >= response.totalItems) {
 					alert("You are on the last page");
 					startIndex = startIndex - 30;
 					} else {
@@ -328,6 +330,8 @@ $("#more").hover(function() {
 					}
 
     }); // end of back page button
+			
+	}) // end of $ get
 		
   }
 	
