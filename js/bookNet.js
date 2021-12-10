@@ -3,6 +3,8 @@ $(function() {
 	// variables
   var genreName = $('#genreName');
 	var startIndex = (0);
+	var nextDiv = $(".nextDiv");
+	var nextPageButton = "";
 	
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
@@ -56,29 +58,42 @@ $(function() {
 				// api for both author and title
 				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc + "&maxResults=30";
 				
+				nextDiv.empty();
+				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				nextDiv.append(nextPageButton);
+				
 				displayBookInfo(titleAndAuthorApi);
-				displayMoreBooks(titleAndAuthorApi, startIndex);
+				displayMoreBooks(titleAndAuthorApi, startIndex, nextPageButton);
 
 			
 			} else if (titleSrc != "" ) {
 
 				var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "&maxResults=30";
 				
+				nextDiv.empty();
+				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				nextDiv.append(nextPageButton);
+				
 				displayBookInfo(titleApi);
-				displayMoreBooks(titleApi, startIndex);
+				displayMoreBooks(titleApi, startIndex, nextPageButton);
 				
 			} else if (authorSrc != "") {
 				var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + authorSrc + "&maxResults=30";
+				
+				nextDiv.empty();
+				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+				nextDiv.append(nextPageButton);
+				
 				displayBookInfo(authorApi);
-				displayMoreBooks(authorApi, startIndex);
+				displayMoreBooks(authorApi, startIndex, nextPageButton);
 				
 			}  else if (isbnSrc != "") {
 				var isbnApi = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + newIsbnSrc + "&maxResults=30";
+				
+				nextDiv.empty();
+				
 				displayBookInfo(isbnApi);
 			}  
-			
-			$(".nextSearchBtn").css("display", "inline");
-			$(".nextGenreBtn").css("display", "none");
 			
 		}
 		
@@ -141,16 +156,15 @@ $("#more").hover(function() {
        genreName.css({
          display: 'inline'
        });
+			 
+			 nextDiv.empty();
+			 nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
+			 nextDiv.append(nextPageButton);
 
        displayBookInfo(api);
 			 
-			 displayMoreBooks(api, startIndex);
-
-			displayMoreGenreBooks(api, startIndex);
-			 
-
-
-			 
+			 displayMoreBooks(api, startIndex, nextPageButton);
+	 
      });
   }
   
@@ -242,10 +256,10 @@ $("#more").hover(function() {
 	)};
 	
 	// Function to display more books
-  function displayMoreBooks(api, startIndex) {
+  function displayMoreBooks(api, startIndex, nextPageButton) {
     
     // Next page
-    $(".nextSearchBtn").click(function() {
+    $(nextPageButton).click(function() {
       
       startIndex = startIndex + 30;
 			
@@ -258,38 +272,9 @@ $("#more").hover(function() {
       
       		console.log(newApi);
 					}
-			
-		 
 
     }); // end of next page button
 		
-		
-		
-		
-  }
-	
-	// Function to display more genre books
-  function displayMoreGenreBooks(api, startIndex) {
-		
-		// Next page
-    $(".nextGenreBtn").click(function() {
-      
-      startIndex = startIndex + 30;
-			
-			if (startIndex >= 200) {
-					alert("You are on the last page")
-					} else {
-						newApi = api + "&startIndex=" + (startIndex);
-
-      		displayBookInfo(newApi);
-      
-      		console.log(newApi);
-					}
-			
-      
-
-    }); // end of next page button
-    
   }
 	
 	// Function to return random letters
