@@ -58,8 +58,8 @@
   border: 1px solid #ccc;
   box-shadow: 0px 0px 10px #ccc;
   position: relative;
-  left: 600px;
-  top: -90px;
+  left: 47px;
+  top: -50px;
   overflow: auto;
   max-height: 550px;
   display: none;
@@ -146,4 +146,5 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .sort:hover .sortBtn {background-color: #CFCBE5;}
+
 

@@ -154,16 +154,24 @@ $(function() {
   });
   
   
-  // mouse over
+  // mouse over more button
 $("#more").hover(function() {
-  $("#moreGenres").show();
+  $("#dialogBox").show();
 }, function() {
-  $("#moreGenres").hide();
+ //$("#dialogBox").hide();
   $(".bookInfo").css({
     top: '-250px'
   });
 });
 
+// hide dialogBox if user mouse leaves dialogBox
+$("#dialogBox").hover(function() {
+    $("#dialogBox").show();
+}, function() {
+  $("#dialogBox").hide();
+});
+
+  // close button on dialog box
   $("#close").click(function() {
     $("#dialogBox").hide();
     
@@ -175,7 +183,9 @@ $("#more").hover(function() {
   // set up click events
   function click(genre) {
      $(genre).click(function() {
-			 
+			 // hide dialog box after genre is clicked
+       $('#dialogBox').hide();
+
        var api = 'https://www.googleapis.com/books/v1/volumes?q=subject:' + genre + "&maxResults=30";
        var genreTitle = genre.substring(1, genre.length);
        var genreToUppercase = genreTitle.toUpperCase();
