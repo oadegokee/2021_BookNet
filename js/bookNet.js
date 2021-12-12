@@ -229,6 +229,7 @@ $("#dialogBox").hover(function() {
 					title = response.items[i].volumeInfo.title;
 					author = response.items[i].volumeInfo.authors;
 					desc = response.items[i].volumeInfo.description;
+					genre = response.items[i].volumeInfo.categories;
 
 					if (response.items[i].volumeInfo.hasOwnProperty('imageLinks')) {
 						imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
@@ -266,6 +267,10 @@ $("#dialogBox").hover(function() {
 					if (!author) {
 						author = "Anonymous";
 					}
+					
+					if (!genre) {
+						genre = "No genre included";
+					}
 
 					if (!desc) {
 						desc = "No description included";
@@ -285,6 +290,7 @@ $("#dialogBox").hover(function() {
 					
 					innerDiv.append("<p id=\"title\">Title: " + title + "</p>");
 					innerDiv.append("<p id=\"author\">Author: " + author + "</p>");
+					innerDiv.append("<p id=\"genre\">Genre: " + genre + "</p>");
 					innerDiv.append("<p id=\"description\">Description: " + desc.split(" ", 10).join(" ") + "...</h3>");
 					innerDiv.append("<p id=\"isbn10\">ISBN_10: " + isbn + "</p>");
 					innerDiv.append("<p id=\"isbn13\">ISBN_13: " + isbn2 + "</p>");
