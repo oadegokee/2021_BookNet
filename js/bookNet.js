@@ -134,6 +134,7 @@ $(function() {
 			displayBookInfo(newApi);
 			console.log(newApi);
 		})
+		
 	}
 
   

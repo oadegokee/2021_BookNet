@@ -57,9 +57,9 @@
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0px 0px 10px #ccc;
-  position: relative;
-  left: 47px;
-  top: -50px;
+  position: absolute;
+  left: 100px;
+  top: 200px;
   overflow: auto;
   max-height: 550px;
   display: none;
@@ -141,7 +141,10 @@
 }
 
 /* Change color of dropdown links on hover */
-.sort-content a:hover {background-color: #ddd;}
+.sort-content a:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
 
 /* Show the dropdown menu on hover */
 .sort:hover .sort-content {display: block;}
