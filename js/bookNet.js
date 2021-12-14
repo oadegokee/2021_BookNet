@@ -388,16 +388,22 @@ $("#dialogBox").hover(function() {
     $(nextPageButton).click(function() {
       startIndex = startIndex + 30;
 			
-      if (startIndex >= response.totalItems) {
-					alert("You are on the last page");
+      if (startIndex >= response.totalItems) {				
 					startIndex = startIndex - 30;
-					} else {
-						newApi = api + "&startIndex=" + (startIndex);
-
+				
+					$(this).css({
+						cursor: "not-allowed",
+						opacity: 0.5
+					});
+			} else {
+					newApi = api + "&startIndex=" + (startIndex);
       		displayBookInfo(newApi);
-      
-      		console.log(newApi);
-					}
+					
+					$(backPageButton).css({
+						cursor: 'pointer',
+						opacity: 1
+					});
+			}
 
     }); // end of next page button
 		
@@ -405,16 +411,22 @@ $("#dialogBox").hover(function() {
     $(backPageButton).click(function() {
       startIndex = startIndex - 30;
 			
-      if (startIndex < 0) {
-						alert("You are on the first page");
-						startIndex = startIndex + 30;
-					} else {
-						newApi = api + "&startIndex=" + (startIndex);
+      if (startIndex < 0) {					
+				startIndex = startIndex + 30;
+				$(this).css({
+					cursor: "not-allowed",
+					opacity: 0.5
+				});
+						
+			} else {
+				 newApi = api + "&startIndex=" + (startIndex);
+				 displayBookInfo(newApi);
 
-      		displayBookInfo(newApi);
-      
-      		console.log(newApi);
-					}
+				 $(nextPageButton).css({
+					 cursor: 'pointer',
+					 opacity: 1
+				 });
+			}
 
     }); // end of back page button
 			

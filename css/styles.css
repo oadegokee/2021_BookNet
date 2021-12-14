@@ -93,8 +93,9 @@
 .backBtn {
 	float: right;
 	border: none;
-	cursor: pointer;
+	cursor: not-allowed;
 	background-color: inherit;
+	opacity: 0.5;
 	
 }
 
