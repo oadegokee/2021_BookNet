@@ -176,6 +176,7 @@
 	box-shadow: 0 5px 30px;
 	background-color: lightgray;
 	overflow: auto;
+	max-width: 700px;
 }
 
 .innerPopUp {
