@@ -6,95 +6,149 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-  <h1 id="websiteTitle">Book Net</h1>
+  <div id="blur">
   
-  <div class="search">
-    <input class="titleSrc" type="text" placeholder="Title">
-    <input class="authorSrc" type="text" placeholder="Author">
-    <input class="isbnSrc" type="text" placeholder="ISBN">
-    <button type="submit" id="submit">Search</button>
-  </div>
-	
+		<h1 id="websiteTitle">Book Net</h1>
+
+		<div class="search">
+			<input class="titleSrc" type="text" placeholder="Title">
+			<input class="authorSrc" type="text" placeholder="Author">
+			<input class="isbnSrc" type="text" placeholder="ISBN">
+			<button type="submit" id="submit">Search</button>
+		</div>
+
+		<div class="sort">
+		<button class="sortBtn">Sort</button>
+		<div class="sort-content">
+			<a class="relevance">Relevance</a>
+			<a class="newest">Newest</a>
+		</div>
+	</div>
+
 		<div class="nextDiv">
-	
-	</div>
-	
-	<div class="sort">
-  <button class="sortBtn">Sort</button>
-  <div class="sort-content">
-    <a class="relevance">Relevance</a>
-    <a class="newest">Newest</a>
-  </div>
-	</div>
 
-	
-  <div class="genres">
-    <h2 genresLabel>GENRES</h2>
-    <div class="featuredGenre">
-      <h3 class="fiction">Fiction</h3>
-      <h3 class="mystery">Mystery</h3>
-      <h3 class="thrillers">Thrillers</h3>
-      <h3 class="nonFiction">Non-Fiction</h3> 
-    </div>
-    
-    <h3 id="more">More</h3>
-    
-    <div id="dialogBox">
-       <div id="closeBtn">
-         <span id="close">X</span>
-       </div>
-      <h3 class="adult">Adult</h3>
-      <h3 class="anthologies">Anthologies</h3>
-      <h3 class="art">Art</h3>
-      <h3 class="audioBooks">AudioBooks</h3>
-      <h3 class="biographies">Biographies</h3>
-      <h3 class="body">Body</h3>
-      <h3 class="business">Business</h3>
-      <h3 class="children">Children</h3>
-      <h3 class="comics">Comics</h3>
-      <h3 class="contemporary">Contemporary</h3>
-      <h3 class="cooking">Cooking</h3>
-      <h3 class="crime">Crime</h3>
-      <h3 class="engineering">Engineering</h3>
-      <h3 class="entertainment">Entertainment</h3>
-      <h3 class="fantasy">Fantasy</h3>
-      <h3 class="fiction">Fiction</h3>
-      <h3 class="food">Food</h3>
-      <h3 class="general">General</h3>
-      <h3 class="health">Health</h3>
-      <h3 class="history">History</h3>
-      <h3 class="horror">Horror</h3>
-      <h3 class="investing">Investing</h3>
-      <h3 class="literary">Literary</h3>
-      <h3 class="literature">Literature</h3>
-      <h3 class="manga">Manga</h3>
-      <h3 class="memoirs">Memoirs</h3>
-      <h3 class="mind">Mind</h3>
-      <h3 class="mystery">Mystery</h3>
-      <h3 class="nonFiction">Non-Fiction</h3>
-      <h3 class="religion">Religion</h3>
-      <h3 class="romance">Romance</h3>
-      <h3 class="science">Science</h3>
-      <h3 class="self">Self</h3>
-      <h3 class="spirituality">Spirituality</h3>
-      <h3 class="sports">Sports</h3>
-      <h3 class="superheroes">Superheroes</h3>
-      <h3 class="technology">Technology</h3>
-      <h3 class="thrillers">Thrillers</h3>
-      <h3 class="travel">Travel</h3>
-      <h3 class="women">Women</h3>
-      <h3 class="young">Young</h3>
-    </div>
-  </div>
+		</div>
 
-  <h1 id="genreName" style="display: none"></h1>
-	
-  <div class="bookInfo">
-  	<div class="booksContainer">
-  		
-  	</div>
-  </div>
+		<div class="genres">
+			<h2 genresLabel>GENRES</h2>
+			<div class="featuredGenre">
+				<h3 class="fiction">Fiction</h3>
+				<h3 class="mystery">Mystery</h3>
+				<h3 class="thrillers">Thrillers</h3>
+				<h3 class="nonFiction">Non-Fiction</h3> 
+			</div>
+
+			<h3 id="more">More</h3>
+
+			<div id="dialogBox">
+				 <div id="closeBtn">
+					 <span id="close">X</span>
+				 </div>
+				<h3 class="adult">Adult</h3>
+				<h3 class="anthologies">Anthologies</h3>
+				<h3 class="art">Art</h3>
+				<h3 class="audioBooks">AudioBooks</h3>
+				<h3 class="biographies">Biographies</h3>
+				<h3 class="body">Body</h3>
+				<h3 class="business">Business</h3>
+				<h3 class="children">Children</h3>
+				<h3 class="comics">Comics</h3>
+				<h3 class="contemporary">Contemporary</h3>
+				<h3 class="cooking">Cooking</h3>
+				<h3 class="crime">Crime</h3>
+				<h3 class="engineering">Engineering</h3>
+				<h3 class="entertainment">Entertainment</h3>
+				<h3 class="fantasy">Fantasy</h3>
+				<h3 class="fiction">Fiction</h3>
+				<h3 class="food">Food</h3>
+				<h3 class="general">General</h3>
+				<h3 class="health">Health</h3>
+				<h3 class="history">History</h3>
+				<h3 class="horror">Horror</h3>
+				<h3 class="investing">Investing</h3>
+				<h3 class="literary">Literary</h3>
+				<h3 class="literature">Literature</h3>
+				<h3 class="manga">Manga</h3>
+				<h3 class="memoirs">Memoirs</h3>
+				<h3 class="mind">Mind</h3>
+				<h3 class="mystery">Mystery</h3>
+				<h3 class="nonFiction">Non-Fiction</h3>
+				<h3 class="religion">Religion</h3>
+				<h3 class="romance">Romance</h3>
+				<h3 class="science">Science</h3>
+				<h3 class="self">Self</h3>
+				<h3 class="spirituality">Spirituality</h3>
+				<h3 class="sports">Sports</h3>
+				<h3 class="superheroes">Superheroes</h3>
+				<h3 class="technology">Technology</h3>
+				<h3 class="thrillers">Thrillers</h3>
+				<h3 class="travel">Travel</h3>
+				<h3 class="women">Women</h3>
+				<h3 class="young">Young</h3>
+			</div>
+
+			<div id="moreGenres">
+				<h3 class="adult">Adult</h3>
+				<h3 class="anthologies">Anthologies</h3>
+				<h3 class="art">Art</h3>
+				<h3 class="audioBooks">AudioBooks</h3>
+				<h3 class="biographies">Biographies</h3>
+				<h3 class="body">Body</h3>
+				<h3 class="business">Business</h3>
+				<h3 class="children">Children</h3>
+				<h3 class="comics">Comics</h3>
+				<h3 class="contemporary">Contemporary</h3>
+				<h3 class="cooking">Cooking</h3>
+				<h3 class="crime">Crime</h3>
+				<h3 class="engineering">Engineering</h3>
+				<h3 class="entertainment">Entertainment</h3>
+				<h3 class="fantasy">Fantasy</h3>
+				<h3 class="fiction">Fiction</h3>
+				<h3 class="food">Food</h3>
+				<h3 class="general">General</h3>
+				<h3 class="health">Health</h3>
+				<h3 class="history">History</h3>
+				<h3 class="horror">Horror</h3>
+				<h3 class="investing">Investing</h3>
+				<h3 class="literary">Literary</h3>
+				<h3 class="literature">Literature</h3>
+				<h3 class="manga">Manga</h3>
+				<h3 class="memoirs">Memoirs</h3>
+				<h3 class="mind">Mind</h3>
+				<h3 class="mystery">Mystery</h3>
+				<h3 class="nonFiction">Non-Fiction</h3>
+				<h3 class="religion">Religion</h3>
+				<h3 class="romance">Romance</h3>
+				<h3 class="science">Science</h3>
+				<h3 class="self">Self</h3>
+				<h3 class="spirituality">Spirituality</h3>
+				<h3 class="sports">Sports</h3>
+				<h3 class="superheroes">Superheroes</h3>
+				<h3 class="technology">Technology</h3>
+				<h3 class="thrillers">Thrillers</h3>
+				<h3 class="travel">Travel</h3>
+				<h3 class="women">Women</h3>
+				<h3 class="young">Young</h3>
+			</div>
+
+		</div>
+
+		<h1 id="genreName" style="display: none"></h1>
+		<div class="bookInfo">
+			<div class="booksContainer">
+
+			</div>
+		</div>
+	</div>
+  
+  <div class="bookPopUp">
+			<div id="closePopUp">
+					 <span id="closeButton">X</span>
+			</div>
+			<div class="innerPopUp">
+
+			</div>
+	</div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="js/bookNet.js"></script>

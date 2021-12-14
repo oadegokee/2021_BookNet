@@ -180,6 +180,16 @@ $("#dialogBox").hover(function() {
       top: '-250px'
     });
   });
+	
+	$("#closeButton").click(function() {
+    $(".bookPopUp").css({
+			display: "none"
+		});
+		
+		$("#blur").css({
+			filter: "blur(0)"
+		});
+  });
   
   // set up click events
   function click(genre) {
@@ -290,17 +300,67 @@ $("#dialogBox").hover(function() {
 					var innerDiv =  $("<div></div>");
 					
 					innerDiv.append("<p id=\"title\">Title: " + title + "</p>");
-					innerDiv.append("<p id=\"author\">Author: " + author + "</p>");
+					innerDiv.append("<p id=\"author\">Author(s): " + author + "</p>");
 					innerDiv.append("<p id=\"genre\">Genre: " + genre + "</p>");
-					innerDiv.append("<p id=\"description\">Description: " + desc.split(" ", 10).join(" ") + "...</h3>");
 					innerDiv.append("<p id=\"isbn10\">ISBN_10: " + isbn + "</p>");
 					innerDiv.append("<p id=\"isbn13\">ISBN_13: " + isbn2 + "</p>");
 					
+					var descDiv = $("<div class=\"description\" style=\"display: none\" ></div>");
+					
+					descDiv.append("<p id=\"descLabel\">Book Description</h3>");
+					descDiv.append("<p id=\"desc\">" + desc + "</h3>");
+					
+					
 					bookContentDiv.append(innerDiv);
+					bookContentDiv.append(descDiv);
 					bookDiv.append(bookContentDiv);
 					
 					booksContainer.append(bookDiv);
 					
+					
+					bookContentDiv.each(function() {
+						$(this).click(function() {
+							
+							$("#blur").css({
+								filter: "blur(8px)"
+							});
+							
+							var bookPopUp = $(".bookPopUp");
+							var innerPopUp = $(".innerPopUp");
+							
+							innerPopUp.empty();
+							
+							var bookDetails = $(this).html();
+							var descDiv = $(this).find(".description");
+							
+							var description = descDiv.find("p");
+							
+							innerPopUp.append(bookDetails);
+							innerPopUp.append(description);
+							
+							bookImage = innerPopUp.find("img");
+							basicContent = innerPopUp.find("div");
+							
+							bookPopUp.css({
+								display: "block",
+							});
+							
+							bookImage.css({
+								width: "180px"
+							});
+							
+							basicContent.css({
+								fontSize: '20px',
+								float: "right",
+								position: "relative",
+								top: "-10px",
+								width: "250px"
+							});
+							
+						});
+						
+					});
+				
 				} // end of for loop
 
 			}
