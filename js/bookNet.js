@@ -54,6 +54,9 @@ $(function() {
     if ((titleSrc == "") && (authorSrc == "") && (isbnSrc == "")) {
         alert("Please enter a title, author, or ISBN");
 		
+		} else if (((/^[a-zA-Z0-9]*$/.test(titleSrc) == false)) || ((/^[a-zA-Z0-9]*$/.test(authorSrc) == false)) || ((/^[a-zA-Z0-9]*$/.test(isbnSrc) == false))) {
+			alert("Please enter a title, author, or ISBN");
+			
 		} else {
 			
 		  if (authorSrc != "" && titleSrc != "") {

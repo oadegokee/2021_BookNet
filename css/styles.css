@@ -120,7 +120,8 @@
 .sort {
   position: relative;
 	clear: right;
-	margin-right: 440px;
+	float: right;
+	right: 400px;
   display: inline-block;
 }
 
