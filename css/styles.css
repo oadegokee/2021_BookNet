@@ -165,17 +165,23 @@
 
 .bookPopUp {
 	position: fixed;
-	top: 15%;
-	left: 25%;
-	width: 600px;
-	height: 600px;
+	top: 0;
+	left: 5%;
+	bottom: 0;
+	right: 5%;
+	display: none;
+	height: 400px;
+	margin: auto;
 	padding: 50px;
 	box-shadow: 0 5px 30px;
-	justify-content: center;
 	background-color: lightgray;
-	z-index: 2;
 	overflow: auto;
-	display: none;
+}
+
+.innerPopUp {
+	position: relative;
+	margin: 0 auto;
+	overflow: auto;
 }
 
 #descLabel {
@@ -192,7 +198,7 @@
   font-weight: 700;
 	position: relative;
 	top: -5%;
-	right: -5%;
+	right: 1%;
 }
 
 #closePopUp span:hover{

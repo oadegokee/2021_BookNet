@@ -342,7 +342,7 @@ $("#dialogBox").hover(function() {
 							var description = descDiv.find("p");
 							var infoLink = descDiv.find("a");
 							var infoLabel = descDiv.find("h3");
-							
+
 							innerPopUp.append(bookDetails);
 							innerPopUp.append(infoLabel);
 							innerPopUp.append(infoLink);
