@@ -13,12 +13,14 @@
 .search {
   width: 550px;
   margin: auto;
+  position:relative;
 }
 
 .genres {
   position: relative;
-  top: -150px;
+  top: -120px;
   width: 100px;
+
 }
 
 .genres h3:hover {
@@ -152,4 +154,15 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .sort:hover .sortBtn {background-color: #CFCBE5;}
 
+@media all and (max-width:800px) {
 
+  .genres {
+    position:relative;
+    top:30px;
+  }
+  
+  #websiteTitle,
+  .search {
+    width: 70%;
+  }
+}
