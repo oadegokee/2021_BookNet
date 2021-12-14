@@ -199,6 +199,10 @@
   box-shadow: 0px 0px 10px white;
 }
 
+#infoLink {
+	color: black;
+}
+
 
 @media all and (max-width:800px) {
   .genres {
@@ -210,4 +214,5 @@
   .search {
     width: 70%;
   }
+
 }

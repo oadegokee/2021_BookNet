@@ -244,6 +244,7 @@ $("#dialogBox").hover(function() {
 					author = response.items[i].volumeInfo.authors;
 					desc = response.items[i].volumeInfo.description;
 					genre = response.items[i].volumeInfo.categories;
+					info = response.items[i].volumeInfo.infoLink;
 
 					if (response.items[i].volumeInfo.hasOwnProperty('imageLinks')) {
 						imageLink = response.items[i].volumeInfo.imageLinks.thumbnail;
@@ -310,6 +311,8 @@ $("#dialogBox").hover(function() {
 					
 					var descDiv = $("<div class=\"description\" style=\"display: none\" ></div>");
 					
+					descDiv.append("<h3 id=\"infoLabel\">Read More: </h3>");
+					descDiv.append("<a id=\"infoLink\" href=\"" + info + "\" target=\"_blank\">Google Books</a>");
 					descDiv.append("<p id=\"descLabel\">Book Description</h3>");
 					descDiv.append("<p id=\"desc\">" + desc + "</h3>");
 					
@@ -337,8 +340,12 @@ $("#dialogBox").hover(function() {
 							var descDiv = $(this).find(".description");
 							
 							var description = descDiv.find("p");
+							var infoLink = descDiv.find("a");
+							var infoLabel = descDiv.find("h3");
 							
 							innerPopUp.append(bookDetails);
+							innerPopUp.append(infoLabel);
+							innerPopUp.append(infoLink);
 							innerPopUp.append(description);
 							
 							bookImage = innerPopUp.find("img");
