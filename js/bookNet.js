@@ -232,8 +232,8 @@ $("#dialogBox").hover(function() {
   });
 	
 	$("#closeButton").click(function() {
-    $(".bookPopUp").css({
-			display: "none"
+    $('.bookPopUp').css({
+			display: 'none'
 		});
 		
 		$("#blur").css({
@@ -399,10 +399,16 @@ $("#dialogBox").hover(function() {
 							bookImage = innerPopUp.find("img");
 							basicContent = innerPopUp.find("div");
 							
+								
 							bookPopUp.css({
-								display: "block"
-							})
-							
+								display: "block",
+								position: 'fixed',
+								left: -2000
+							}).animate({
+								left: '5%'
+							}, 500, 'easeOutCubic');
+								
+
 							bookImage.css({
 								width: "180px"
 							});
