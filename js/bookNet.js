@@ -20,6 +20,7 @@ $(function() {
 		$('#websiteTitle').css({
 			position: 'relative',
 			left: 10
+			
 		}).stop().animate({
 			left: -10
 		}, 500, 'easeOutCirc');
