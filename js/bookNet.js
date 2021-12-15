@@ -7,6 +7,31 @@ $(function() {
 	var nextPageButton = "";
 	var backPageButton = "";
 	
+	$('#websiteTitle').css({
+		opacity: 0,
+		position: 'relative',
+		left: -900
+	}).animate({
+		opacity: 1,
+		left: 10
+	}, 1500, 'easeOutBounce');
+	
+	$('#websiteTitle').hover(function() {
+		$('#websiteTitle').css({
+			position: 'relative',
+			left: 10
+		}).stop().animate({
+			left: -10
+		}, 500, 'easeOutCirc');
+	}, function() {
+		$('#websiteTitle').css({
+			position: 'relative',
+			left: -10
+		}).stop().animate({
+			left: 10
+		}, 500, 'easeOutCirc');
+	});
+	
 	// Displays random books without any search
   var randomBooksApi = "https://www.googleapis.com/books/v1/volumes?q=" + randomBooks() + "&maxResults=40";
 	sorting(randomBooksApi);
@@ -147,6 +172,27 @@ $(function() {
    
   jQuery.each( genreNames, function( i, val ) {
    click(val);
+		
+		$(val).css({
+				boxShadow: '0px 0px 5px #ccc',
+				padding: '2px',
+				borderRadius: '5px',
+				textAlign: 'center'
+		});
+		
+		$(val).hover(function () {
+			$(val).css({
+				boxShadow: '0 0 3px black',
+				transform: 'translate(0, -2px)'
+			});
+		}, function() {
+			$(val).css({
+				boxShadow: '0px 0px 5px #ccc',
+				transform: 'translate(0, 0px)'
+			});
+		});
+		
+		
   });
   
   $("#more").click(function() {
@@ -196,6 +242,7 @@ $("#dialogBox").hover(function() {
   
   // set up click events
   function click(genre) {
+		
      $(genre).click(function() {
 			 // hide dialog box after genre is clicked
        $('#dialogBox').hide();
@@ -352,8 +399,8 @@ $("#dialogBox").hover(function() {
 							basicContent = innerPopUp.find("div");
 							
 							bookPopUp.css({
-								display: "block",
-							});
+								display: "block"
+							})
 							
 							bookImage.css({
 								width: "180px"
