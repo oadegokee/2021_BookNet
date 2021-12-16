@@ -150,21 +150,27 @@ $(function() {
 	// Sorting button
 	function sorting(api) {
 		$(".newest").click(function() {
-			newApi = api + "&orderBy=newest";
-			$(".newest").html("Newest ✓");
-			$(".relevance").html("Relevance");
 			
-			displayBookInfo(newApi);
-			console.log(newApi);
+			if ($(".newest").html() != ("Newest ✓") ) {
+					newApi = api + "&orderBy=newest";
+					$(".newest").html("Newest ✓");
+					$(".relevance").html("Relevance");
+
+					displayBookInfo(newApi);
+					} 
+			
 		})
 		
 		$(".relevance").click(function() {
-			newApi = api + "&orderBy=relevance";
-			$(".newest").html("Newest");
-			$(".relevance").html("Relevance ✓");
 			
-			displayBookInfo(newApi);
-			console.log(newApi);
+			if ($(".relevance").html() != ("Relevance ✓") ) {
+					newApi = api + "&orderBy=relevance";
+					$(".newest").html("Newest");
+					$(".relevance").html("Relevance ✓");
+			
+					displayBookInfo(newApi);
+					} 
+			
 		})
 		
 	}
@@ -283,7 +289,6 @@ $("#dialogBox").hover(function() {
   function displayBookInfo(api) {
     
     $.get(api, function(response) {
-      console.log(response);
 			$(".booksContainer").html("");
 			
 			if (response.totalItems == 0) {
