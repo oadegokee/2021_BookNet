@@ -93,7 +93,7 @@ $(function() {
 				titleAndAuthorApi = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + titleSrc + "+inauthor:" + authorSrc + "&maxResults=30";
 				
 				nextDiv.empty();
-				backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
+				backPageButton = $("<button class=\"backBtn\">Previous Page |</button>");
 				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
 				
 				nextDiv.append(nextPageButton);
@@ -110,7 +110,7 @@ $(function() {
 				var titleApi = "https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleSrc + "&maxResults=30";
 				
 				nextDiv.empty();
-				backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
+				backPageButton = $("<button class=\"backBtn\">Previous Page |</button>");
 				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
 				
 				nextDiv.append(nextPageButton);
@@ -125,7 +125,7 @@ $(function() {
 				var authorApi = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + authorSrc + "&maxResults=30";
 				
 				nextDiv.empty();
-				backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
+				backPageButton = $("<button class=\"backBtn\">Previous Page |</button>");
 				nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
 				
 				nextDiv.append(nextPageButton);
@@ -266,7 +266,7 @@ $("#dialogBox").hover(function() {
        });
 			 
 			 nextDiv.empty();
-			 backPageButton = $("<button class=\"backBtn\">Back Page |</button>");
+			 backPageButton = $("<button class=\"backBtn\">Previous Page |</button>");
 			 nextPageButton = $("<button class=\"nextBtn\">Next Page</button>");
 				
 			 nextDiv.append(nextPageButton);
@@ -464,7 +464,7 @@ $("#dialogBox").hover(function() {
 
     }); // end of next page button
 		
-		// Back page
+		// Previous page
     $(backPageButton).click(function() {
       startIndex = startIndex - 30;
 			
@@ -485,7 +485,7 @@ $("#dialogBox").hover(function() {
 				 });
 			}
 
-    }); // end of back page button
+    }); // end of Previous page button
 			
 	}) // end of $ get
 		
