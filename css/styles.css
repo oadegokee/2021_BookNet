@@ -141,12 +141,18 @@
 
 /* Dropdown Button */
 .sortBtn {
-  background-color: #E7E2FF;
-  color: white;
+  background-color: rgb(29, 141, 29);
+  background-color: 50%;
+  color: #f5f5dc;
   padding-right: 10px;
   padding-left: 10px;
   font-size: 18px;
   border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+  position: relative;
+  top: 250px;
+  left: 260px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -156,6 +162,7 @@
 	float: right;
 	right: 400px;
   display: inline-block;
+
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -166,6 +173,8 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  top: 273px;
+  left: 260px;
 }
 
 /* Links inside the dropdown */
@@ -186,7 +195,9 @@
 .sort:hover .sort-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.sort:hover .sortBtn {background-color: #CFCBE5;}
+.sort:hover .sortBtn {
+  background-color: rgb(7, 83, 7);
+}
 
 
 
@@ -242,6 +253,7 @@
 #infoLink {
 	color: black;
 }
+
 
 
 @media all and (max-width:800px) {
