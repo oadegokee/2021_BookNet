@@ -80,7 +80,7 @@
   left: 100px;
   top: 200px;
   overflow: auto;
-  max-height: 550px;
+  max-height: 350px;
   display: none;
   z-index: 1;
   background-color: lightgray;
@@ -255,4 +255,14 @@
     width: 70%;
   }
 
+
+  #dialogBox {
+    max-height: 180px;
+    width: 400%;
+    column-count: 2;
+  }
+
+  #closeBtn {
+    float:left;
+  }
 }
