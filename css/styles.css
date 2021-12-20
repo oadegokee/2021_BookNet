@@ -20,6 +20,7 @@
   position: relative;
   top: -120px;
   width: 100px;
+  z-index: 2;
 }
 
 #more {
@@ -38,10 +39,15 @@
 }
 
 .booksContainer {
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+     position: relative;
+     top: -290px;
+     margin: 2em;
+     z-index: 1;
+     margin: 90px;
 }
 
 .book {
@@ -54,10 +60,12 @@
 .book:hover {
 	transform: translate(0, -10px);
 	box-shadow: 0 0 3px black;
+  
 }
 
 .bookContent {
     display: flex;
+   
 }
 
 
@@ -68,7 +76,8 @@
 #genreName {
   position: relative;
   width: 210px;
-  left: 100px;
+  left: 200px;
+  top: -200px;
 }
 
 #dialogBox {
@@ -82,7 +91,7 @@
   overflow: auto;
   max-height: 350px;
   display: none;
-  z-index: 1;
+  z-index: 3;
   background-color: lightgray;
 }
 
@@ -151,8 +160,8 @@
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 10px;
   position: relative;
-  top: 250px;
-  left: 260px;
+  top: 50px;
+  right: -200px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -162,7 +171,6 @@
 	float: right;
 	right: 400px;
   display: inline-block;
-
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -172,9 +180,9 @@
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  top: 273px;
-  left: 260px;
+  z-index: 3;
+  top: 73px;
+  right: -305px;
 }
 
 /* Links inside the dropdown */
@@ -253,6 +261,7 @@
 #infoLink {
 	color: black;
 }
+
 
 
 /* changing css for width of browser going under 800px */
