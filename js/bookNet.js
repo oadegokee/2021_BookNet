@@ -41,9 +41,9 @@ $(function() {
 	// Go back to the home page when the user clicks on the logo
 	$('#websiteTitle').click(function() {
 		window.location.reload();
-		$(".titleSrc").val();
-		$(".authorSrc").val();
-		$(".isbnSrc").val();
+		$(".titleSrc").val("");
+		$(".authorSrc").val("");
+		$(".isbnSrc").val("");
 	});
 	
 
