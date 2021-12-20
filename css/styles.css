@@ -255,7 +255,7 @@
 }
 
 
-
+/* changing css for width of browser going under 800px */
 @media all and (max-width:800px) {
   .genres {
     position:relative;
